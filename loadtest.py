@@ -6,7 +6,6 @@ import random
 from urllib.parse import urljoin
 
 from molotov import scenario
-import browserid
 import browserid.jwt
 from browserid.tests.support import make_assertion
 
