@@ -2,17 +2,19 @@
     "molotov": {
         "tests": {
             "big": {
-                "duration": 60,
+                "duration": 300,
                 "processes": 10,
+                "workers": 200,
                 "scenario": "loadtest.py",
                 "workers": 100
             },
             "small": {
-                "duration": 60,
+                "duration": 300,
+                "workers": 100,
                 "scenario": "loadtest.py"
             },
             "smoke": {
-                "duration": 1,
+                "max_runs": 1,
                 "scenario": "loadtest.py"
             }
         }
