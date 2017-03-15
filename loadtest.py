@@ -1,16 +1,14 @@
 """ Molotov-based test.
 """
-import json
-from molotov import scenario, setup, global_setup, teardown, global_teardown
 import time
 import uuid
 import random
 from urllib.parse import urljoin
 
+from molotov import scenario
 import browserid
 import browserid.jwt
 from browserid.tests.support import make_assertion
-
 
 
 ONE_YEAR = 60 * 60 * 24 * 365
@@ -61,26 +59,26 @@ async def test_bad_assertion(session):
     uid = random.randint(1, 1000000)
     # Try to get a token using an invalid assertion.
     # Obviously, this should result in a 401.
-    if self._flip_a_coin(25):
+    if _flip_a_coin(25):
         # expired assertion
-        assertion = self._make_assertion(
+        assertion = _make_assertion(
             "{uid}@{host}".format(uid=uid, host=MOCKMYID_DOMAIN),
             exp=int(time.time() - ONE_YEAR) * 1000
         )
-    elif self._flip_a_coin(25):
+    elif _flip_a_coin(25):
         # email/issuer mismatch
-        assertion = self._make_assertion(
+        assertion = _make_assertion(
             "{uid}@hotmail.com".format(uid=uid)
         )
-    elif self._flip_a_coin(25):
+    elif _flip_a_coin(25):
         # invalid issuer privkey
-        assertion = self._make_assertion(
+        assertion = _make_assertion(
             "{uid}@{host}".format(uid=uid, host=MOCKMYID_DOMAIN),
             issuer="api.accounts.firefox.com"
         )
     else:
         # invalid audience
-        assertion = self._make_assertion(
+        assertion = _make_assertion(
             "{uid}@{host}".format(uid=uid, host=MOCKMYID_DOMAIN),
             audience="http://123done.org"
         )
